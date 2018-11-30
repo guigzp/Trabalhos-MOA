@@ -9,27 +9,27 @@
  * @author guiza
  */
 public class Item {
-    private double peso;
-    private double preco;
+    private int peso;
+    private int preco;
 
-    public double getPeso() {
+    public int getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(int peso) {
         this.peso = peso;
     }
 
-    public double getPreco() {
+    public int getPreco() {
         return preco;
     }
 
-    public Item(double peso, double preco) {
+    public Item(int peso, int preco) {
         this.peso = peso;
         this.preco = preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(int preco) {
         this.preco = preco;
     }
 }

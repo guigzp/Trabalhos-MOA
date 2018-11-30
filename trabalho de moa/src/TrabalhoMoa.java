@@ -17,7 +17,7 @@ import static java.lang.Integer.parseInt;
 public class TrabalhoMoa {
     private static int qtdItens;
     private static List<Item> itens = new ArrayList<>();
-    private static double capacidade;
+    private static int capacidade;
     private static int tamanhoPopulacao;
     private static int qtdGeracoes;
     private static double probCruzamento;
@@ -27,7 +27,7 @@ public class TrabalhoMoa {
         System.out.print("Insira o nome do arquivo de entrada: ");
         Scanner entrada = new Scanner(System.in);
         String nomeArquivo = entrada.nextLine();
-        double aux;
+        int aux;
         try {
             FileReader arq = new FileReader(nomeArquivo);
             BufferedReader lerArq = new BufferedReader(arq);
@@ -35,16 +35,16 @@ public class TrabalhoMoa {
             qtdItens = parseInt(linha);
             for(int i = 0; i < qtdItens; i++){
                 linha = lerArq.readLine();
-                aux = parseDouble(linha);
-                itens.add(new Item(0.0, aux));
+                aux = parseInt(linha);
+                itens.add(new Item(0, aux));
             }
             for(int i = 0; i < qtdItens; i++){
                 linha = lerArq.readLine();
-                aux = parseDouble(linha);
+                aux = parseInt(linha);
                 itens.get(i).setPeso(aux);
             }
             linha = lerArq.readLine();
-            capacidade = parseDouble(linha);
+            capacidade = parseInt(linha);
             linha = lerArq.readLine();
             tamanhoPopulacao = parseInt(linha);
             linha = lerArq.readLine();
@@ -64,15 +64,15 @@ public class TrabalhoMoa {
     //java -cp ./src TrabalhoMoa 100 25 300 1 100 200.0 0.6 0.015 at.txt
     //[qtdElem][iniValor][endValor][iniPeso][endPeso][capacidade][tamPopulacao][qtdGeracoes][proCruz][probMuta][arquivo de Saida]
     public static void generator(String[] args){
-        int n, iniValor, endValor, iniPeso, endPeso, tamanhoPopulacao, qtdGeracoes;
-        double capacidade, probCruzamento, probMutacao;
+        int n, iniValor, capacidade,endValor, iniPeso, endPeso, tamanhoPopulacao, qtdGeracoes;
+        double probCruzamento, probMutacao;
 
         n = parseInt(args[0]);
         iniValor = parseInt(args[1]);
         endValor = parseInt(args[2]);
         iniPeso = parseInt(args[3]);
         endPeso = parseInt(args[4]);
-        capacidade = parseDouble(args[5]);
+        capacidade = parseInt(args[5]);
         tamanhoPopulacao = parseInt(args[6]);
         qtdGeracoes = parseInt(args[7]);
         probCruzamento = parseDouble(args[8]);
@@ -102,13 +102,16 @@ public class TrabalhoMoa {
 
     public static void main(String[] args) {
         //generator(args);
-
         lerArquivo();
+
+
+        System.out.println("------------------Calculo da Mochila Binaria utilizando programação dinamica---------------");
+        Mochila teste = new Mochila(itens, capacidade);
+        System.out.println("Valor Solução: " + teste.MochilaPraValer(itens,capacidade) + "\n");
+
+
+        System.out.println("\n------------------Calculo da Mochila Binaria utilizando algoritmo genetico------------------");
         new MochilaGenetica(qtdItens, itens, capacidade, tamanhoPopulacao, qtdGeracoes, probCruzamento, probMutacao);
-        //Mochila teste = new Mochila(itens, capacidade);
-        //System.out.println(teste.MochilaPraValer(itens,capacidade, itens.size()));
-
-
     }
 
 }
