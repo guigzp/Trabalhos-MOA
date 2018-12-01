@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalhogenetico;
 
 import java.io.*;
@@ -13,14 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
-
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
-/**
- *
- * @author guiza
- */
+
 public class TrabalhoGenetico {
 
     //atributos da mochila binária
@@ -74,9 +64,6 @@ public class TrabalhoGenetico {
     }
 
     //Gera o arquivo txt com os valores de entrada.
-    //javac src/*.java
-    //java -cp ./src TrabalhoMoa 100 25 300 1 100 200 0.6 0.015 at.txt
-    //[qtdElem][iniValor][endValor][iniPeso][endPeso][capacidade][tamPopulacao][qtdGeracoes][proCruz][probMuta][arquivo de Saida]
     public static void generator(){
         int n=0, iniValor, capacidade=0, endValor, iniPeso, endPeso, tamanhoPopulacao=0, qtdGeracoes=0, intervaloValor = 0, intervaloPeso = 0;
         double probCruzamento=0, probMutacao=0;
@@ -146,10 +133,10 @@ public class TrabalhoGenetico {
         }
     }
 
+    //Classe principal
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
         System.out.print("Digite 0 para gerar um arquivo de itens ou 1 para continuar: ");
-
         while(modoDeExecuçao < 0 || modoDeExecuçao > 1){
             modoDeExecuçao = entrada.nextInt();
             if(modoDeExecuçao == 0){
@@ -159,12 +146,10 @@ public class TrabalhoGenetico {
                 System.out.print("Escolha uma opção valida: ");
             }
         }
-
         lerArquivo();
         System.out.println("------------------Calculo da Mochila Binaria utilizando programação dinamica---------------");
-        Mochila teste = new Mochila(itens, capacidade);
-        System.out.println("Valor Solução: " + teste.MochilaPraValer(itens,capacidade) + "\n");
-
+        Mochila teste = new Mochila();
+        System.out.println("Valor Solução: " + teste.CalculoMochilaPD(itens,capacidade) + "\n");
         System.out.println("\n------------------Calculo da Mochila Binaria utilizando algoritmo genetico------------------");
         MochilaGenetica teste2 = new MochilaGenetica(itens, capacidade, tamanhoPopulacao, qtdGeracoes, probCruzamento, probMutacao);
         teste2.executaMochilaGenetica();
