@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+package trabalhogenetico;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,8 +49,7 @@ public class Mochila {
                     v[i][j] = 0;
                 }else if(itens.get(i -1).getPeso() <= j){
                     Item teste = itens.get(i -1);
-                    v[i][j] = Math.max( teste.getPreco() + v[i-1][j-itens.get(i-1).getPeso()],
-                            v[i-1][j]);
+                    v[i][j] = Math.max(teste.getPreco() + v[i-1][j-itens.get(i-1).getPeso()], v[i-1][j]);
                 }else{
                     v[i][j] =  v[i-1][j];
                 }

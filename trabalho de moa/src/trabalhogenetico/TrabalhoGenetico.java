@@ -3,19 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package trabalhogenetico;
 
 import java.io.*;
 import java.util.*;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
-
 /**
  *
  * @author guiza
  */
-public class TrabalhoMoa {
-    private static int qtdItens;
+public class TrabalhoGenetico {
+   private static int qtdItens;
     private static List<Item> itens = new ArrayList<>();
     private static int capacidade;
     private static int tamanhoPopulacao;
@@ -61,7 +66,7 @@ public class TrabalhoMoa {
 
     //Gera o arquivo txt com os valores de entrada.
     //javac src/*.java
-    //java -cp ./src TrabalhoMoa 100 25 300 1 100 200.0 0.6 0.015 at.txt
+    //java -cp ./src TrabalhoMoa 100 25 300 1 100 200 0.6 0.015 at.txt
     //[qtdElem][iniValor][endValor][iniPeso][endPeso][capacidade][tamPopulacao][qtdGeracoes][proCruz][probMuta][arquivo de Saida]
     public static void generator(String[] args){
         int n, iniValor, capacidade,endValor, iniPeso, endPeso, tamanhoPopulacao, qtdGeracoes;
@@ -104,14 +109,15 @@ public class TrabalhoMoa {
         //generator(args);
         lerArquivo();
 
-
         System.out.println("------------------Calculo da Mochila Binaria utilizando programação dinamica---------------");
         Mochila teste = new Mochila(itens, capacidade);
         System.out.println("Valor Solução: " + teste.MochilaPraValer(itens,capacidade) + "\n");
 
 
         System.out.println("\n------------------Calculo da Mochila Binaria utilizando algoritmo genetico------------------");
-        new MochilaGenetica(qtdItens, itens, capacidade, tamanhoPopulacao, qtdGeracoes, probCruzamento, probMutacao);
+        MochilaGenetica teste2 = new MochilaGenetica(qtdItens, itens, capacidade, tamanhoPopulacao, qtdGeracoes, probCruzamento, probMutacao);
+        teste2.executaMochilaGenetica();
+        
     }
 
 }

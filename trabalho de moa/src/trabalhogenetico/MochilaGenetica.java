@@ -1,3 +1,5 @@
+package trabalhogenetico;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,9 +9,8 @@ public class MochilaGenetica {
     private int qtdItens;
     private List<Item> itens;
     private int capacidade;
-
+    private int qtdGeracoes;
     private int tentativas = 0;
-
     private static double probCruzamento;
     private static double probMutacao;
     private ArrayList<ArrayList<Integer>> cromossomos;
@@ -24,16 +25,37 @@ public class MochilaGenetica {
         MochilaGenetica.probCruzamento = probCruzamento;
         MochilaGenetica.probMutacao = probMutacao;
         cromossomos = new ArrayList<>();
-
+        this.qtdGeracoes = qtdGeracoes;
         gerarCromossomos();
+    }
 
+    public boolean geraSolucoesIniciais(){
+        boolean naoAchou = false;
+        ArrayList<Integer> aux = new ArrayList<>();
+        for(int i = 0; i < qtdItens && !naoAchou; i++){
+            if(itens.get(i).getPeso() <= capacidade){
+                for(int j =0; j < qtdItens; j++){
+                    if(j != i){
+                        aux.add(0);
+                    }else{
+                        aux.add(1);
+                    }
+                }
+                cromossomos.add(aux);
+                cromossomos.add(aux);
+                naoAchou = true;
+            }
+        }
+        return naoAchou;
+    }
 
+    public void executaMochilaGenetica(){
         for(int l=1; l< qtdGeracoes+1; l++){
             System.out.println("Geração: " + l);
             System.out.println("Valor da Melhor Solução: " + getValor());
             System.out.print("Itens da Soluçao: ");
-            for(int i=0; i< melhorAdaptado.size() ;i++){
-                if(melhorAdaptado.get(i) == 1){
+            for(int i=1; i< melhorAdaptado.size()+1 ;i++){
+                if(melhorAdaptado.get(i-1) == 1){
                     System.out.print(i + " ");
                 }
             }
@@ -59,6 +81,7 @@ public class MochilaGenetica {
             }
             cromossomos.add(cromossomo);
         }
+        geraSolucoesIniciais();
         getMelhorAdaptado();
     }
 
@@ -136,7 +159,7 @@ public class MochilaGenetica {
         melhor1 = getMelhorAdaptado();
         cromossomos.remove(melhor1);
         melhor2 = getMelhorAdaptado();
-        if((melhor1.isEmpty() || melhor2.isEmpty())){
+        if(melhor1.isEmpty()){
             tentativas++;
             if(tentativas == 100){
                 System.out.println("Depois de 100 tentativas o algoritmo não conseguiu nenhuma resposta valida por isso foi abortado");
@@ -145,7 +168,13 @@ public class MochilaGenetica {
             cromossomos.clear();
             gerarCromossomos();
             return 1;
-        } else{
+        }else if(melhor2.isEmpty()){
+            cromossomos.clear();
+            cromossomos.add(melhor1);
+            for (int i = 1; i < tamanhoPopulacao; i++) {
+                cromossomos.add(mutacao(cruzamento(melhor1, melhor1)));
+            }
+        }else{
             cromossomos.clear();
             cromossomos.add(melhor1);
             for (int i = 1; i < tamanhoPopulacao; i++) {
