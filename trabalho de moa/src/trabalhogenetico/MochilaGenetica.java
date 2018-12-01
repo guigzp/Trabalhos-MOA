@@ -6,19 +6,23 @@ import java.util.Random;
 
 public class MochilaGenetica {
 
-    private int qtdItens;
+    //atributos da mochila binária
     private List<Item> itens;
     private int capacidade;
+
+    //atributos do algoritmo genetico
     private int qtdGeracoes;
-    private int tentativas = 0;
     private static double probCruzamento;
     private static double probMutacao;
     private ArrayList<ArrayList<Integer>> cromossomos;
     private static int tamanhoPopulacao;
     private ArrayList<Integer> melhorAdaptado = new ArrayList<>();
 
-    public MochilaGenetica(int qtdItens, List<Item> itens, int capacidade, int tamanhoPopulacao, int qtdGeracoes, double probCruzamento, double probMutacao){
-        this.qtdItens = qtdItens;
+    //Auxiliar da classe
+    private int tentativas = 0;
+
+    //Construtor da classe
+    public MochilaGenetica(List<Item> itens, int capacidade, int tamanhoPopulacao, int qtdGeracoes, double probCruzamento, double probMutacao){
         this.itens = itens;
         this.capacidade = capacidade;
         MochilaGenetica.tamanhoPopulacao = tamanhoPopulacao;
@@ -29,26 +33,26 @@ public class MochilaGenetica {
         gerarCromossomos();
     }
 
-    public boolean geraSolucoesIniciais(){
-        boolean naoAchou = false;
-        ArrayList<Integer> aux = new ArrayList<>();
-        for(int i = 0; i < qtdItens && !naoAchou; i++){
+    //verifica se existe algum elemento com peso menor q a capacidade
+    public boolean getMenorItem(ArrayList<Integer> item){
+        boolean Achou = false;
+        item = new ArrayList<>();
+        for(int i = 0; i < itens.size() && !Achou; i++){
             if(itens.get(i).getPeso() <= capacidade){
-                for(int j =0; j < qtdItens; j++){
+                for(int j =0; j < itens.size(); j++){
                     if(j != i){
-                        aux.add(0);
+                        item.add(0);
                     }else{
-                        aux.add(1);
+                        item.add(1);
                     }
                 }
-                cromossomos.add(aux);
-                cromossomos.add(aux);
-                naoAchou = true;
+                Achou = true;
             }
         }
-        return naoAchou;
+        return Achou;
     }
 
+    //Executa o algoritmo até atingir a quantidade de gerações passada
     public void executaMochilaGenetica(){
         for(int l=1; l< qtdGeracoes+1; l++){
             System.out.println("Geração: " + l);
@@ -67,8 +71,10 @@ public class MochilaGenetica {
         }
     }
 
+    //Cria a primeira geração de cromossomos
     public void gerarCromossomos(){
         ArrayList<Integer> cromossomo;
+        ArrayList<Integer> item = new ArrayList<>();
         Random random = new Random();
         for(int i=0; i<tamanhoPopulacao ;i++){
             cromossomo = new ArrayList<>();
@@ -81,10 +87,17 @@ public class MochilaGenetica {
             }
             cromossomos.add(cromossomo);
         }
-        geraSolucoesIniciais();
         getMelhorAdaptado();
+        if(melhorAdaptado.isEmpty()){
+            cromossomos.set(0,item);
+            if(!getMenorItem(item)){
+                System.out.println("Não exite solução para a mochila");
+                System.exit('1');
+            }
+        }
     }
 
+    //Retorna o cromosso que gera a melhor resposta para o algoritmo da mochila binária
     public ArrayList<Integer> getMelhorAdaptado() {
         int valorTotal, pesoTotal, melhorLocalValor=0;
         ArrayList<Integer> melhorLocal = new ArrayList<>();
@@ -108,6 +121,7 @@ public class MochilaGenetica {
         return melhorLocal;
     }
 
+    //Retorna o valor do melhorAdaptado
     public int getValor(){
         int valorTotal =0;
         for(int j=0; j<melhorAdaptado.size() ; j++) {
@@ -116,10 +130,12 @@ public class MochilaGenetica {
         return valorTotal;
     }
 
+    //Possibilita a mudança da lista melhorAdaptado
     public void setMelhorAdaptado(ArrayList<Integer> melhor){
         this.melhorAdaptado = melhor;
     }
 
+    //Realiza o cruzamento de dois cromossomos
     public ArrayList<Integer> cruzamento(ArrayList<Integer> melhor1, ArrayList<Integer> melhor2){
         Random random = new Random();
         if(probCruzamento > random.nextDouble()){
@@ -137,10 +153,11 @@ public class MochilaGenetica {
         return melhorAdaptado;
     }
 
+    //Realiza a mutação de um cromossomo
     public ArrayList<Integer> mutacao(ArrayList<Integer> entrada) {
         ArrayList<Integer> novo = new ArrayList<>();
         Random random = new Random();
-        for (int i = 0; i < qtdItens; i++) {
+        for (int i = 0; i < itens.size(); i++) {
             if (random.nextDouble() < probMutacao) {
                 if (entrada.get(i) == 1) {
                     novo.add(0);
@@ -154,6 +171,7 @@ public class MochilaGenetica {
         return novo;
     }
 
+    //Gera a proxima geração de cromossomos
     public int geraGeracao(){
         ArrayList<Integer> melhor1, melhor2;
         melhor1 = getMelhorAdaptado();
@@ -172,7 +190,7 @@ public class MochilaGenetica {
             cromossomos.clear();
             cromossomos.add(melhor1);
             for (int i = 1; i < tamanhoPopulacao; i++) {
-                cromossomos.add(mutacao(cruzamento(melhor1, melhor1)));
+                cromossomos.add(mutacao(melhor1));
             }
         }else{
             cromossomos.clear();

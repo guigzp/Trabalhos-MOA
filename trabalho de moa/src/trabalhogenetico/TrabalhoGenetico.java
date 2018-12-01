@@ -20,19 +20,23 @@ import static java.lang.Integer.parseInt;
  * @author guiza
  */
 public class TrabalhoGenetico {
-   private static int qtdItens;
+
+    //atributos da mochila binária
     private static List<Item> itens = new ArrayList<>();
     private static int capacidade;
+
+    //atributos do algoritmo genetico
     private static int tamanhoPopulacao;
     private static int qtdGeracoes;
     private static double probCruzamento;
     private static double probMutacao;
 
+    //Faz a leitura do arquivo e transforma os seus dados nos atributos dessa classe
      public static void lerArquivo() {
         System.out.print("Insira o nome do arquivo de entrada: ");
         Scanner entrada = new Scanner(System.in);
         String nomeArquivo = entrada.nextLine();
-        int aux;
+        int aux, qtdItens;
         try {
             FileReader arq = new FileReader(nomeArquivo);
             BufferedReader lerArq = new BufferedReader(arq);
@@ -101,23 +105,22 @@ public class TrabalhoGenetico {
             System.out.println(probCruzamento);
             System.out.print(probMutacao);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Não foi possivel criar o arquivo");
         }
     }
 
     public static void main(String[] args) {
-        //generator(args);
-        lerArquivo();
 
+         //função comentada pois só funciona via terminal
+         //generator(args);
+
+        lerArquivo();
         System.out.println("------------------Calculo da Mochila Binaria utilizando programação dinamica---------------");
         Mochila teste = new Mochila(itens, capacidade);
         System.out.println("Valor Solução: " + teste.MochilaPraValer(itens,capacidade) + "\n");
 
-
         System.out.println("\n------------------Calculo da Mochila Binaria utilizando algoritmo genetico------------------");
-        MochilaGenetica teste2 = new MochilaGenetica(qtdItens, itens, capacidade, tamanhoPopulacao, qtdGeracoes, probCruzamento, probMutacao);
+        MochilaGenetica teste2 = new MochilaGenetica(itens, capacidade, tamanhoPopulacao, qtdGeracoes, probCruzamento, probMutacao);
         teste2.executaMochilaGenetica();
-        
     }
-
 }
