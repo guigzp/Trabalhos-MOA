@@ -36,7 +36,6 @@ public class MochilaGenetica {
     //verifica se existe algum elemento com peso menor q a capacidade
     public boolean getMenorItem(ArrayList<Integer> item){
         boolean Achou = false;
-        item = new ArrayList<>();
         for(int i = 0; i < itens.size() && !Achou; i++){
             if(itens.get(i).getPeso() <= capacidade){
                 for(int j =0; j < itens.size(); j++){
@@ -89,11 +88,12 @@ public class MochilaGenetica {
         }
         getMelhorAdaptado();
         if(melhorAdaptado.isEmpty()){
-            cromossomos.set(0,item);
-            if(!getMenorItem(item)){
+            boolean achou = getMenorItem(item);
+            if(!achou){
                 System.out.println("Não exite solução para a mochila");
                 System.exit('1');
             }
+            cromossomos.set(0,item);
         }
     }
 
