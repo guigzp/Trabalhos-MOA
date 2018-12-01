@@ -65,14 +65,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1303" />
-          <entry key="txt" value="4" />
+          <entry key="java" value="1528" />
+          <entry key="txt" value="27" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1303" />
-          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="JAVA" value="1528" />
+          <entry key="PLAIN_TEXT" value="27" />
         </counts>
       </usages-collector>
     </session>
@@ -88,11 +88,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/trabalhogenetico/MochilaGenetica.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="89" column="33" selection-start-line="89" selection-start-column="33" selection-end-line="89" selection-end-column="33" />
+            <state relative-caret-position="48">
+              <caret line="52" column="102" selection-start-line="52" selection-start-column="102" selection-end-line="52" selection-end-column="102" />
+              <folding>
+                <element signature="e#3385#3386#0" expanded="true" />
+                <element signature="e#3425#3426#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,17 +104,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/trabalhogenetico/TrabalhoGenetico.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1119">
+            <state relative-caret-position="459">
               <caret line="40" column="40" lean-forward="true" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/at.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="201" column="3" lean-forward="true" selection-start-line="201" selection-start-column="3" selection-end-line="201" selection-end-column="3" />
+            <state relative-caret-position="139">
+              <caret line="203" column="1" selection-start-line="203" selection-start-column="1" selection-end-line="203" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -121,6 +125,7 @@
     <findStrings>
       <find>geraSolucoesIni</find>
       <find>cromossomos.size</find>
+      <find>235</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -130,8 +135,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/trabalhogenetico/TrabalhoGenetico.java" />
-        <option value="$PROJECT_DIR$/at.txt" />
         <option value="$PROJECT_DIR$/src/trabalhogenetico/MochilaGenetica.java" />
+        <option value="$PROJECT_DIR$/at.txt" />
       </list>
     </option>
   </component>
@@ -181,7 +186,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543675588615" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543678031521" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -228,12 +233,12 @@
       <option name="presentableId" value="Default" />
       <updated>1543667082190</updated>
       <workItem from="1543667083705" duration="573000" />
-      <workItem from="1543671875723" duration="3670000" />
+      <workItem from="1543671875723" duration="6079000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4243000" />
+    <option name="totallyTimeSpent" value="6652000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -248,7 +253,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28870967" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.516129" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -285,22 +290,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/trabalhogenetico/TrabalhoGenetico.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1119">
+        <state relative-caret-position="459">
           <caret line="40" column="40" lean-forward="true" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/at.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="201" column="3" lean-forward="true" selection-start-line="201" selection-start-column="3" selection-end-line="201" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/trabalhogenetico/MochilaGenetica.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="89" column="33" selection-start-line="89" selection-start-column="33" selection-end-line="89" selection-end-column="33" />
+        <state relative-caret-position="48">
+          <caret line="52" column="102" selection-start-line="52" selection-start-column="102" selection-end-line="52" selection-end-column="102" />
+          <folding>
+            <element signature="e#3385#3386#0" expanded="true" />
+            <element signature="e#3425#3426#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/at.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="203" column="1" selection-start-line="203" selection-start-column="1" selection-end-line="203" selection-end-column="1" />
         </state>
       </provider>
     </entry>

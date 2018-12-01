@@ -17,6 +17,7 @@ public class MochilaGenetica {
     private ArrayList<ArrayList<Integer>> cromossomos;
     private static int tamanhoPopulacao;
     private ArrayList<Integer> melhorAdaptado = new ArrayList<>();
+    private ArrayList<Integer> solucoes = new ArrayList<>();
 
     //Construtor da classe
     public MochilaGenetica(List<Item> itens, int capacidade, int tamanhoPopulacao, int qtdGeracoes, double probCruzamento, double probMutacao){
@@ -48,9 +49,13 @@ public class MochilaGenetica {
         return Achou;
     }
 
+    public boolean confirma(){
+        return (solucoes.lastIndexOf(getValor()) - solucoes.indexOf(getValor())) <= this.qtdGeracoes/4;
+    }
+
     //Executa o algoritmo até atingir a quantidade de gerações passada
     public void executaMochilaGenetica(){
-        for(int l=1; l< qtdGeracoes+1; l++){
+        for(int l=1; (l< qtdGeracoes+1) && confirma() ; l++){
             System.out.println("Geração: " + l);
             System.out.println("Valor da Melhor Solução: " + getValor());
             System.out.print("Itens da Soluçao: ");
@@ -93,6 +98,10 @@ public class MochilaGenetica {
             cromossomos.set(0,item);
             setMelhorAdaptado(item);
         }
+    }
+
+    public void setSolucoes(int solucao) {
+        this.solucoes.add(solucao);
     }
 
     //Retorna o cromosso que gera a melhor resposta para o algoritmo da mochila binária
@@ -171,6 +180,7 @@ public class MochilaGenetica {
 
     //Gera a proxima geração de cromossomos
     public int geraGeracao(){
+        setSolucoes(getValor());
         ArrayList<Integer> melhor1, melhor2;
         melhor1 = getMelhorAdaptado();
         cromossomos.remove(melhor1);
