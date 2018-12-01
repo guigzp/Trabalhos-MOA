@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
+
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 /**
@@ -31,8 +33,11 @@ public class TrabalhoGenetico {
     private static double probCruzamento;
     private static double probMutacao;
 
+    //atributo auxiliar
+    private static int modoDeExecuçao = 2;
+
     //Faz a leitura do arquivo e transforma os seus dados nos atributos dessa classe
-     public static void lerArquivo() {
+    public static void lerArquivo() {
         System.out.print("Insira o nome do arquivo de entrada: ");
         Scanner entrada = new Scanner(System.in);
         String nomeArquivo = entrada.nextLine();
@@ -72,26 +77,57 @@ public class TrabalhoGenetico {
     //javac src/*.java
     //java -cp ./src TrabalhoMoa 100 25 300 1 100 200 0.6 0.015 at.txt
     //[qtdElem][iniValor][endValor][iniPeso][endPeso][capacidade][tamPopulacao][qtdGeracoes][proCruz][probMuta][arquivo de Saida]
-    public static void generator(String[] args){
-        int n, iniValor, capacidade,endValor, iniPeso, endPeso, tamanhoPopulacao, qtdGeracoes;
-        double probCruzamento, probMutacao;
+    public static void generator(){
+        int n=0, iniValor, capacidade=0, endValor, iniPeso, endPeso, tamanhoPopulacao=0, qtdGeracoes=0, intervaloValor = 0, intervaloPeso = 0;
+        double probCruzamento=0, probMutacao=0;
+        Scanner entrada = new Scanner(System.in);
 
-        n = parseInt(args[0]);
-        iniValor = parseInt(args[1]);
-        endValor = parseInt(args[2]);
-        iniPeso = parseInt(args[3]);
-        endPeso = parseInt(args[4]);
-        capacidade = parseInt(args[5]);
-        tamanhoPopulacao = parseInt(args[6]);
-        qtdGeracoes = parseInt(args[7]);
-        probCruzamento = parseDouble(args[8]);
-        probMutacao = parseDouble(args[9]);
+        while (n<=0){
+            System.out.print("Digite a quandidade de itens: ");
+            n = entrada.nextInt();
+        }
+        System.out.print("Digite o limite inferior do valor dos itens: ");
+        iniValor = entrada.nextInt();
+        while (intervaloValor <= 0){
+            System.out.print("Digite o limite superior do valor dos itens: ");
+            endValor = entrada.nextInt();
+            intervaloValor = endValor - iniValor;
+        }
+        System.out.print("Digite o limite inferior do peso dos itens: ");
+        iniPeso = entrada.nextInt();
+        while (intervaloPeso <= 0){
+            System.out.print("Digite o limite superior do peso dos itens: ");
+            endPeso = entrada.nextInt();
+            intervaloPeso = endPeso - iniPeso;
+        }
+        while (capacidade<=0){
+            System.out.print("Digite a capacidade da mochila: ");
+            capacidade = entrada.nextInt();
+        }
+        while (tamanhoPopulacao <=0){
+            System.out.print("Digite o tamanho da população: ");
+            tamanhoPopulacao = entrada.nextInt();
+        }
+        while (qtdGeracoes <=0){
+            System.out.print("Digite a quantidade maxima de gerações: ");
+            qtdGeracoes = entrada.nextInt();
+        }
+        while (probCruzamento <=0){
+            System.out.print("Digite a probabilidade de cruzamento: ");
+            probCruzamento = entrada.nextDouble();
+        }
+        while (probMutacao <=0){
+            System.out.print("Digite a probabilidade de mutação: ");
+            probMutacao = entrada.nextDouble();
+        }
         try {
-            PrintStream arquivo = new PrintStream(args[10]);
+            System.out.print("Digite o nome do arquivo a ser gerado: ");
+            entrada.nextLine();
+            String arquivoNome = entrada.nextLine();
+            PrintStream stdout = System.out;
+            PrintStream arquivo = new PrintStream(arquivoNome);
             System.setOut(arquivo);
             Random r = new Random();
-            int intervaloValor = endValor - iniValor;
-            int intervaloPeso = endPeso - iniPeso;
             System.out.println(n);
             for(int i=0; i < n; i++){
                 System.out.println(r.nextInt(intervaloValor)+iniValor);
@@ -104,15 +140,25 @@ public class TrabalhoGenetico {
             System.out.println(qtdGeracoes);
             System.out.println(probCruzamento);
             System.out.print(probMutacao);
+            System.setOut(stdout);
         } catch (FileNotFoundException e) {
             System.out.println("Não foi possivel criar o arquivo");
         }
     }
 
     public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        System.out.print("Digite 0 para gerar um arquivo de itens ou 1 para continuar: ");
 
-         //função comentada pois só funciona via terminal
-         //generator(args);
+        while(modoDeExecuçao < 0 || modoDeExecuçao > 1){
+            modoDeExecuçao = entrada.nextInt();
+            if(modoDeExecuçao == 0){
+                generator();
+            } else if(modoDeExecuçao != 1){
+                System.out.println("Opção invalida\n");
+                System.out.print("Escolha uma opção valida: ");
+            }
+        }
 
         lerArquivo();
         System.out.println("------------------Calculo da Mochila Binaria utilizando programação dinamica---------------");
