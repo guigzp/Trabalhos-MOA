@@ -18,9 +18,6 @@ public class MochilaGenetica {
     private static int tamanhoPopulacao;
     private ArrayList<Integer> melhorAdaptado = new ArrayList<>();
 
-    //Auxiliar da classe
-    private int tentativas = 0;
-
     //Construtor da classe
     public MochilaGenetica(List<Item> itens, int capacidade, int tamanhoPopulacao, int qtdGeracoes, double probCruzamento, double probMutacao){
         this.itens = itens;
@@ -94,6 +91,7 @@ public class MochilaGenetica {
                 System.exit('1');
             }
             cromossomos.set(0,item);
+            setMelhorAdaptado(item);
         }
     }
 
@@ -177,16 +175,7 @@ public class MochilaGenetica {
         melhor1 = getMelhorAdaptado();
         cromossomos.remove(melhor1);
         melhor2 = getMelhorAdaptado();
-        if(melhor1.isEmpty()){
-            tentativas++;
-            if(tentativas == 100){
-                System.out.println("Depois de 100 tentativas o algoritmo não conseguiu nenhuma resposta valida por isso foi abortado");
-                System.exit(1);
-            }
-            cromossomos.clear();
-            gerarCromossomos();
-            return 1;
-        }else if(melhor2.isEmpty()){
+        if(melhor2.isEmpty()){
             cromossomos.clear();
             cromossomos.add(melhor1);
             for (int i = 1; i < tamanhoPopulacao; i++) {
