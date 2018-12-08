@@ -29,7 +29,7 @@ public class MochilaPD {
     private static int capacidade;
 
     //atributo auxiliar
-    private static int modoDeExecuçao = 2;
+    private static int modoDeExecucao = 2;
 
     //Faz a leitura do arquivo e transforma os seus dados nos atributos dessa classe
     public static void lerArquivo() {
@@ -114,11 +114,11 @@ public class MochilaPD {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
         System.out.print("Digite 0 para gerar um arquivo de itens ou 1 para continuar: ");
-        while(modoDeExecuçao < 0 || modoDeExecuçao > 1){
-            modoDeExecuçao = entrada.nextInt();
-            if(modoDeExecuçao == 0){
+        while(modoDeExecucao < 0 || modoDeExecucao > 1){
+            modoDeExecucao = entrada.nextInt();
+            if(modoDeExecucao == 0){
                 generator();
-            } else if(modoDeExecuçao != 1){
+            } else if(modoDeExecucao != 1){
                 System.out.println("Opção invalida\n");
                 System.out.print("Escolha uma opção valida: ");
             }
