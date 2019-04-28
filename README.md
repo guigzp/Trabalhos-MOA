@@ -6,7 +6,7 @@ Estes trabalhos foram feitos como parte da disciplina de Modelagem e Otimizaçã
 
 * **Guilherme Zamberlam Pomini** - Contato: guizamberlam@hotmail.com
 * **Charles Chaclim**
-* **Elio Bolognese Neto*
+* **Elio Bolognese Neto**
 
 ## Descrição dos Trabalhos
 
